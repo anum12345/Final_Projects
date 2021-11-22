@@ -1,10 +1,22 @@
-#define RelayPin1 3 //room
-#define RelayPin2 4  //kitchen
-#define RelayPin3 5 //controller room
-#define RelayPin4 6 //garden
+
+#define RelayPin1 5 //room D1
+#define RelayPin2 4  //kitchen D2
+#define RelayPin3 14 //controller room D5
+#define RelayPin4 12 //garden D6
 #define Speed1 21
 #define Speed2 19
 #define Speed4 18
+int buzzer = D2; //buzzer
+int sensor = A0; //sensor
+int led_green = D5; //no leakage indication
+int led_red = D6; // leakage indication
+// Define threshold value. You might need to change it.
+int sensor_limit = 600;
+char auth[] = "hsYG_5da4gdP9jZkL18O5RNcJSrBT-Ou";
+char ssid[] = "Alexahome";
+char pass[] = "loranthus";
+
+
 void setup()
 {
   // put your setup code here, to run once:
@@ -21,10 +33,16 @@ void setup()
   digitalWrite(Speed1, LOW);
   digitalWrite(Speed2, LOW);
   digitalWrite(Speed4, LOW);
-  
+  pinMode(buzzer, OUTPUT);
+  pinMode(sensor, INPUT);
+  pinMode(led_green, OUTPUT);
+  pinMode(led_red, OUTPUT);
+  digitalWrite(led_green, LOW);
+  digitalWrite(led_red, LOW);
+  Blynk.begin(auth, ssid, pass);
 }
-BLYNK_WRITE(V0)
-{
+
+
  
   
   
@@ -38,11 +56,11 @@ void loop() {
     
     if(val == "room bulb on")
     {
-      digitalWrite(3, HIGH);
+      digitalWrite(5, HIGH);
     }
     if(val == "room bulb off")
     {
-      digitalWrite(3, LOW);
+      digitalWrite(5, LOW);
     }
     if(val == "kitchen bulb on")
     {
@@ -54,20 +72,20 @@ void loop() {
     }
     if(val == "controller room bulb on")
     {
-      digitalWrite(5, HIGH);
+      digitalWrite(14, HIGH);
     }
     if(val == "controller room bulb off")
     {
-      digitalWrite(5, LOW);
+      digitalWrite(14, LOW);
     }
    
     if(val == "garden bulb on")
     {
-      digitalWrite(6, HIGH);
+      digitalWrite(12, HIGH);
     }
     if(val == "garden bulb off")
     {
-      digitalWrite(6, LOW);
+      digitalWrite(12, LOW);
     }
     if (val== "fan off")
   {
@@ -116,5 +134,30 @@ void loop() {
 
 
   }
+ 
+   int sensor_value = analogRead(sensor);
+   Serial.print("Gas Level: ");
+   Serial.println(sensor_value);
+   Blynk.virtualWrite(V1, sensor_value);
+  // Checks if it has reached the threshold value
+  if (sensor_value > sensor_limit)
+  {
+  digitalWrite(led_green, HIGH);
+  digitalWrite(led_red, LOW);
+  digitalWrite(buzzer, HIGH);
+  delay(500);
+  digitalWrite(buzzer, LOW);
+  Blynk.notify("Alert: Gas Leakage Detected");
+  }
+  else
+  {
+  digitalWrite(buzzer, LOW);
+  digitalWrite(led_green, LOW);
+  digitalWrite(led_red, HIGH);
+  }
+  delay(100);
+  Blynk.run(); // Initiates Blynk
 }
+}
+
 
