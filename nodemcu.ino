@@ -25,6 +25,10 @@ void setup()
   pinMode(RelayPin2, OUTPUT);
   pinMode(RelayPin3, OUTPUT);
   pinMode(RelayPin4, OUTPUT);
+  digitalWrite(RelayPin1, LOW);
+  digitalWrite(RelayPin2, LOW);
+  digitalWrite(RelayPin3, LOW);
+  digitalWrite(RelayPin4, LOW);
   // Debug console
   pinMode(Speed1, OUTPUT);
   pinMode(Speed2, OUTPUT);
