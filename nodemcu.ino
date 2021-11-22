@@ -1,11 +1,14 @@
-#define fan 2
-#define bulb 3
-
-void setup() {
+#define RelayPin1 3 //room
+#define RelayPin2 4  //kitchen
+#define RelayPin3 5 //controller room
+#define RelayPin4 6 //garden
   // put your setup code here, to run once:
   Serial.begin(9600);
-  pinMode(fan, OUTPUT);
-  pinMode(bulb, OUTPUT);
+  pinMode(RelayPin1, OUTPUT);
+  pinMode(RelayPin2, OUTPUT);
+  pinMode(RelayPin3, OUTPUT);
+  pinMode(RelayPin4, OUTPUT);
+  
 }
 
 void loop() {
@@ -24,46 +27,38 @@ void loop() {
     }
     if(val == "room bulb on")
     {
-      digitalWrite(bulb, HIGH);
+      digitalWrite(3, HIGH);
     }
     if(val == "room bulb off")
     {
-      digitalWrite(bulb, LOW);
+      digitalWrite(3, LOW);
     }
     if(val == "kitchen bulb on")
     {
-      digitalWrite(bulb, HIGH);
+      digitalWrite(4, HIGH);
     }
     if(val == "kitchen bulb off")
     {
-      digitalWrite(bulb, LOW);
+      digitalWrite(4, LOW);
     }
     if(val == "controller room bulb on")
     {
-      digitalWrite(bulb, HIGH);
+      digitalWrite(5, HIGH);
     }
     if(val == "controller room bulb off")
     {
-      digitalWrite(bulb, LOW);
+      digitalWrite(5, LOW);
     }
-    if(val == "all on")
-    {
-      digitalWrite(fan, HIGH);
-      digitalWrite(bulb, HIGH);
-    }
+   
     if(val == "garden bulb on")
     {
-      digitalWrite(bulb, HIGH);
+      digitalWrite(6, HIGH);
     }
     if(val == "garden bulb off")
     {
-      digitalWrite(bulb, LOW);
+      digitalWrite(6, LOW);
     }
-    if(val == "all off")
-    {
-      digitalWrite(bulb, LOW);
-      digitalWrite(fan, LOW);
-    }
+
   }
 }
 
