@@ -2,7 +2,7 @@ float d;
 void setup() {
  Serial.begin(9600);
  pinMode(7,INPUT);//echo pin of ultraSonic
- pinMode(8,OUTPUT);//trig pin of ultraSonic
+ pinMode(6,OUTPUT);//trig pin of ultraSonic
  pinMode(10,OUTPUT);// relay
  pinMode(9,OUTPUT);// buzzer pin
 }
@@ -11,9 +11,9 @@ int high=5;
 
 void vol() //distance calculation...
 {
- digitalWrite(8,HIGH);
+ digitalWrite(6,HIGH);
  delayMicroseconds(8);
- digitalWrite(8,LOW);
+ digitalWrite(6,LOW);
  delayMicroseconds(2);
  d=pulseIn(7,HIGH);
  d=d/69;
