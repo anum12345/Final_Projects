@@ -1,4 +1,8 @@
-
+#include<ESP8266WiFi.h>
+string val;
+WiFiServer server(80);
+string i;
+WiFiServer server(80);
 #define RelayPin1 5 //room D1
 #define RelayPin2 4  //kitchen D2
 #define RelayPin3 14 //controller room D5
@@ -21,6 +25,20 @@ void setup()
 {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  val="";
+  WiFi.disconnect();
+  delay(300);
+  WiFi.begin("moazam","moazam123");
+  Serial.println("Connected to Wifi");
+  while(WiFi.status() != WL_CONNECTED)
+    {
+    Serial.print("..");
+    delay(200);
+  }
+  Serial.println();
+  Serial.println("NodeMCU is Connected!");
+  Serial.println(WiFi.localIP());
+  server.begin();
   pinMode(RelayPin1, OUTPUT);
   pinMode(RelayPin2, OUTPUT);
   pinMode(RelayPin3, OUTPUT);
