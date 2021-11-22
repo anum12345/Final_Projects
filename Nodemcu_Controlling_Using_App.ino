@@ -5,6 +5,7 @@ WiFiServer server(80);
 void setup()
 {
   Serial.begin(9600);
+  i="";
   pinMode(4,OUTPUT);
   WiFi.disconnect();
   delay(300);
