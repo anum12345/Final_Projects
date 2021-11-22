@@ -51,6 +51,14 @@ void loop() {
       digitalWrite(fan, HIGH);
       digitalWrite(bulb, HIGH);
     }
+    if(val == "garden bulb on")
+    {
+      digitalWrite(bulb, HIGH);
+    }
+    if(val == "garden bulb off")
+    {
+      digitalWrite(bulb, LOW);
+    }
     if(val == "all off")
     {
       digitalWrite(bulb, LOW);
