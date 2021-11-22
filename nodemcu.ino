@@ -6,10 +6,10 @@
 #define Speed1 21
 #define Speed2 19
 #define Speed4 18
-int buzzer = D2; //buzzer
+int buzzer = D3; //buzzer
 int sensor = A0; //sensor
-int led_green = D5; //no leakage indication
-int led_red = D6; // leakage indication
+int led_green = D4; //no leakage indication
+int led_red = D7; // leakage indication
 // Define threshold value. You might need to change it.
 int sensor_limit = 600;
 char auth[] = "hsYG_5da4gdP9jZkL18O5RNcJSrBT-Ou";
