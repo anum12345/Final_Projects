@@ -6,15 +6,6 @@
 #define Speed1 21
 #define Speed2 19
 #define Speed4 18
-int buzzer = D3; //buzzer
-int sensor = A0; //sensor
-int led_green = D4; //no leakage indication
-int led_red = D7; // leakage indication
-// Define threshold value. You might need to change it.
-int sensor_limit = 600;
-char auth[] = "hsYG_5da4gdP9jZkL18O5RNcJSrBT-Ou";
-char ssid[] = "Alexahome";
-char pass[] = "loranthus";
 
 
 void setup()
@@ -38,19 +29,8 @@ void setup()
   digitalWrite(Speed1, LOW);
   digitalWrite(Speed2, LOW);
   digitalWrite(Speed4, LOW);
-  pinMode(buzzer, OUTPUT);
-  pinMode(sensor, INPUT);
-  pinMode(led_green, OUTPUT);
-  pinMode(led_red, OUTPUT);
-  digitalWrite(led_green, LOW);
-  digitalWrite(led_red, LOW);
-  Blynk.begin(auth, ssid, pass);
+  
 }
-
-
- 
-  
-  
 
 void loop() {
   // put your main code here, to run repeatedly:
@@ -135,33 +115,9 @@ void loop() {
     digitalWrite(Speed1, HIGH);
     digitalWrite(Speed2, HIGH);
     digitalWrite(Speed4, HIGH);
-  }
-
-
-  }
- 
-   int sensor_value = analogRead(sensor);
-   Serial.print("Gas Level: ");
-   Serial.println(sensor_value);
-   Blynk.virtualWrite(V1, sensor_value);
-  // Checks if it has reached the threshold value
-  if (sensor_value > sensor_limit)
-  {
-  digitalWrite(led_green, HIGH);
-  digitalWrite(led_red, LOW);
-  digitalWrite(buzzer, HIGH);
-  delay(500);
-  digitalWrite(buzzer, LOW);
-  Blynk.notify("Alert: Gas Leakage Detected");
-  }
-  else
-  {
-  digitalWrite(buzzer, LOW);
-  digitalWrite(led_green, LOW);
-  digitalWrite(led_red, HIGH);
-  }
-  delay(100);
-  Blynk.run(); // Initiates Blynk
+    
+  } 
+  
 }
 }
 
