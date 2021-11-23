@@ -1,11 +1,10 @@
 
-#define RelayPin1 5 //room D1
-#define RelayPin2 4  //kitchen D2
-#define RelayPin3 14 //controller room D5
-#define RelayPin4 12 //garden D6
-#define Speed1 21
-#define Speed2 19
-#define Speed4 18
+#define RelayPin1 2 //room 
+#define RelayPin2 3  //kitchen 
+#define RelayPin3 4 //controller room 
+#define Speed1 5
+#define Speed2 6
+#define Speed4 7
 
 
 void setup()
@@ -16,11 +15,9 @@ void setup()
   pinMode(RelayPin1, OUTPUT);
   pinMode(RelayPin2, OUTPUT);
   pinMode(RelayPin3, OUTPUT);
-  pinMode(RelayPin4, OUTPUT);
   digitalWrite(RelayPin1, LOW);
   digitalWrite(RelayPin2, LOW);
   digitalWrite(RelayPin3, LOW);
-  digitalWrite(RelayPin4, LOW);
   // Debug console
   pinMode(Speed1, OUTPUT);
   pinMode(Speed2, OUTPUT);
@@ -41,37 +38,30 @@ void loop() {
     
     if(val == "room bulb on")
     {
-      digitalWrite(5, HIGH);
+      digitalWrite(2, HIGH);
     }
     if(val == "room bulb off")
     {
-      digitalWrite(5, LOW);
+      digitalWrite(2, LOW);
     }
     if(val == "kitchen bulb on")
     {
-      digitalWrite(4, HIGH);
+      digitalWrite(3, HIGH);
     }
     if(val == "kitchen bulb off")
     {
-      digitalWrite(4, LOW);
+      digitalWrite(3, LOW);
     }
     if(val == "controller room bulb on")
     {
-      digitalWrite(14, HIGH);
+      digitalWrite(4, HIGH);
     }
     if(val == "controller room bulb off")
     {
-      digitalWrite(14, LOW);
+      digitalWrite(4, LOW);
     }
    
-    if(val == "garden bulb on")
-    {
-      digitalWrite(12, HIGH);
-    }
-    if(val == "garden bulb off")
-    {
-      digitalWrite(12, LOW);
-    }
+    
     if (val== "fan off")
   {
     //All realys Off - Fan Off
