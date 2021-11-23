@@ -7,8 +7,6 @@ char ssid[] = "Alexahome";
 char pass[] = "loranthus";
 int buzzer = D2; //buzzer
 int sensor = A0; //sensor
-int led_green = D5; //no leakage indication
-int led_red = D6; // leakage indication
 // Define threshold value. You might need to change it.
 int sensor_limit = 600;
 void setup()
@@ -17,8 +15,6 @@ void setup()
   pinMode(sensor, INPUT);
   pinMode(led_green, OUTPUT);
   pinMode(led_red, OUTPUT);
-  digitalWrite(led_green, LOW);
-  digitalWrite(led_red, LOW);
   Blynk.begin(auth, ssid, pass);
 }
 void loop()
@@ -30,8 +26,6 @@ void loop()
   // Checks if it has reached the threshold value
   if (sensor_value > sensor_limit)
   {
-  digitalWrite(led_green, HIGH);
-  digitalWrite(led_red, LOW);
   digitalWrite(buzzer, HIGH);
   delay(500);
   digitalWrite(buzzer, LOW);
@@ -40,8 +34,6 @@ void loop()
   else
   {
   digitalWrite(buzzer, LOW);
-  digitalWrite(led_green, LOW);
-  digitalWrite(led_red, HIGH);
   }
   delay(100);
   Blynk.run(); // Initiates Blynk
