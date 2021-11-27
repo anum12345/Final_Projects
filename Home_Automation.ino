@@ -45,7 +45,14 @@ void setup()
   digitalWrite(relay2,LOW);
   digitalWrite(relay3,LOW);
   digitalWrite(relay4,LOW);
-      
+ 
+  pinMode(Speed1, OUTPUT);
+  pinMode(Speed2, OUTPUT);
+  pinMode(Speed4, OUTPUT);
+  //Initially the fan will be in OFF state
+  digitalWrite(Speed1, LOW);
+  digitalWrite(Speed2, LOW);
+  digitalWrite(Speed4, LOW);    
   connectWiFi();
   server.begin();
 }
