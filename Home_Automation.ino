@@ -28,7 +28,9 @@ String  val =""; // Command received from Android device
 int relay1 = 14;
 int relay2 = 15;
 int relay3 = 3;
-int relay4 = 1;
+int speed1 = 1;
+int speed2 = 0;
+int speed4 = 4;
 
 void setup()
 {
@@ -39,10 +41,10 @@ void setup()
   pinMode(relay3, OUTPUT);  
   pinMode(relay4, OUTPUT);  
 
-  digitalWrite(relay1,HIGH);
-  digitalWrite(relay2,HIGH);
-  digitalWrite(relay3,HIGH);
-  digitalWrite(relay4,HIGH);
+  digitalWrite(relay1,LOW);
+  digitalWrite(relay2,LOW);
+  digitalWrite(relay3,LOW);
+  digitalWrite(relay4,LOW);
       
   connectWiFi();
   server.begin();
@@ -56,27 +58,27 @@ void loop()
 
          if(val == "room bulb on")
     {
-      digitalWrite(2, HIGH);
+      digitalWrite(14, HIGH);
     }
     if(val == "room bulb off")
     {
-      digitalWrite(2, LOW);
+      digitalWrite(14, LOW);
     }
     if(val == "kitchen bulb on")
     {
-      digitalWrite(3, HIGH);
+      digitalWrite(15, HIGH);
     }
     if(val == "kitchen bulb off")
     {
-      digitalWrite(3, LOW);
+      digitalWrite(15, LOW);
     }
     if(val == "controller room bulb on")
     {
-      digitalWrite(4, HIGH);
+      digitalWrite(3, HIGH);
     }
     if(val == "controller room bulb off")
     {
-      digitalWrite(4, LOW);
+      digitalWrite(3, LOW);
     }
    
     
