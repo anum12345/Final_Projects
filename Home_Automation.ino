@@ -22,7 +22,7 @@ WiFiClient client;
 WiFiServer server(80);
 const char* ssid = "YOUR SSID";
 const char* password = "YOUR PASSWORD";
-String  command =""; // Command received from Android device
+String  val =""; // Command received from Android device
 
 // Set Relay Pins
 int relay1 = 14;
@@ -52,30 +52,80 @@ void loop()
 {
     client = server.available();
     if (!client) return; 
-    command = checkClient ();
+    val = checkClient ();
 
-         if (command == "r1on"  || command == "ligar 1"    || command == "ligar um")        digitalWrite(relay1,LOW);
-    else if (command == "r1off" || command == "desligar 1" || command == "desligar um")     digitalWrite(relay1,HIGH);
-    else if (command == "r2on"  || command == "ligar 2"    || command == "ligar dois")      digitalWrite(relay2,LOW);     
-    else if (command == "r2off" || command == "desligar 2" || command == "desligar dois")   digitalWrite(relay2,HIGH);
-    else if (command == "r3on"  || command == "ligar 3"    || command == "ligar tres")      digitalWrite(relay3,LOW);
-    else if (command == "r3off" || command == "desligar 3" || command == "desligar tres")   digitalWrite(relay3,HIGH);
-    else if (command == "r4on"  || command == "ligar 4"    || command == "ligar quatro")    digitalWrite(relay4,LOW);
-    else if (command == "r4off" || command == "desligar 4" || command == "desligar quatro") digitalWrite(relay4,HIGH);
-    else if (command == "allon" || command == "ligar tudo" || command == "ligar todos") 
+         if(val == "room bulb on")
     {
-      digitalWrite(relay1,LOW);
-      digitalWrite(relay2,LOW);
-      digitalWrite(relay3,LOW);
-      digitalWrite(relay4,LOW);
+      digitalWrite(2, HIGH);
     }
-    else if (command == "alloff" || command == "desligar tudo" || command == "desligar todos") 
+    if(val == "room bulb off")
     {
-      digitalWrite(relay1,HIGH);
-      digitalWrite(relay2,HIGH);
-      digitalWrite(relay3,HIGH);
-      digitalWrite(relay4,HIGH);
+      digitalWrite(2, LOW);
     }
+    if(val == "kitchen bulb on")
+    {
+      digitalWrite(3, HIGH);
+    }
+    if(val == "kitchen bulb off")
+    {
+      digitalWrite(3, LOW);
+    }
+    if(val == "controller room bulb on")
+    {
+      digitalWrite(4, HIGH);
+    }
+    if(val == "controller room bulb off")
+    {
+      digitalWrite(4, LOW);
+    }
+   
+    
+    if (val== "fan off")
+  {
+    //All realys Off - Fan Off
+    
+    digitalWrite(Speed1, LOW);
+    digitalWrite(Speed2, LOW);
+    digitalWrite(Speed4, LOW);
+  }
+
+  if (val=="fan on at low speed")
+  {
+    //Speed1 Relay On - Fan at speed 1
+    
+    digitalWrite(Speed1, LOW);
+    digitalWrite(Speed2, LOW);
+    digitalWrite(Speed4, LOW);
+    delay(500);
+    digitalWrite(Speed1, HIGH);
+  }
+
+  if (val == "fan on at medium speed")
+  {
+    //Speed2 Relay On - Fan at speed 2
+    
+    digitalWrite(Speed1, LOW);
+    digitalWrite(Speed2, LOW);
+    digitalWrite(Speed4, LOW);
+    delay(500);
+    digitalWrite(Speed2, HIGH);
+    digitalWrite(Speed4, HIGH);
+  }
+
+  if (val == "fan on at high speed")
+  {
+    //Speed1 & Speed2 Relays On - Fan at speed 3
+    
+    digitalWrite(Speed1, LOW);
+    digitalWrite(Speed2, LOW);
+    digitalWrite(Speed4, LOW);
+    delay(500);
+    digitalWrite(Speed1, HIGH);
+    digitalWrite(Speed2, HIGH);
+    digitalWrite(Speed4, HIGH);
+    
+  } 
+  
     sendBackEcho(command); // send command echo back to android device
     command = "";
 }
