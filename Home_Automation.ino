@@ -1,3 +1,6 @@
+
+
+   
 /*************************************************************************************
 *   Home Automation with Android App and NodeMCU
 *
@@ -28,9 +31,9 @@ String  val =""; // Command received from Android device
 int relay1 = 14;
 int relay2 = 15;
 int relay3 = 3;
-int speed1 = 1;
-int speed2 = 0;
-int speed4 = 4;
+int Speed1 = 1;
+int Speed2 = 0;
+int Speed4 = 4;
 
 void setup()
 {
@@ -39,12 +42,12 @@ void setup()
   pinMode(relay1, OUTPUT); 
   pinMode(relay2, OUTPUT);  
   pinMode(relay3, OUTPUT);  
-  pinMode(relay4, OUTPUT);  
+
 
   digitalWrite(relay1,LOW);
   digitalWrite(relay2,LOW);
   digitalWrite(relay3,LOW);
-  digitalWrite(relay4,LOW);
+
  
   pinMode(Speed1, OUTPUT);
   pinMode(Speed2, OUTPUT);
@@ -135,8 +138,8 @@ void loop()
     
   } 
   
-    sendBackEcho(command); // send command echo back to android device
-    command = "";
+    sendBackEcho(val); // send command echo back to android device
+    val = "";
 }
 
 /* connecting WiFi */
