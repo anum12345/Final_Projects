@@ -1,30 +1,8 @@
 
-
-   
-/*************************************************************************************
-*   Home Automation with Android App and NodeMCU
-*
-*  Smart Devices
-*   ==> Relay1
-*   ==> Relay2
-*   ==> Relay3
-*   ==> Relay4
-*   
-*  Groups of devices
-*   ==> All Devices ON/OFF
-*   
-*  Voice activation and response
-*
-*   Developed by Marcelo Rovai on 27March17
-*   Visit my blog: https://MJRoBot.org 
-*   
-*   WARNING: When uploading a code ==> Power-off Relays
-************************************************************************************/
 #include <ESP8266WiFi.h>
 WiFiClient client;
 WiFiServer server(80);
-const char* ssid = "YOUR SSID";
-const char* password = "YOUR PASSWORD";
+
 String  val =""; // Command received from Android device
 
 // Set Relay Pins
@@ -37,8 +15,18 @@ int Speed4 = 4;
 
 void setup()
 {
-  Serial.begin(115200);
-
+ 
+  Serial.begin(9600);
+  WiFi.begin("Anum", "Jamil123");
+  while(WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print("..");
+    delay(200);
+  }
+  Serial.println();
+  Serial.println("NodeMCU is Connected!");
+  Serial.println(WiFi.localIP());
+  
   pinMode(relay1, OUTPUT); 
   pinMode(relay2, OUTPUT);  
   pinMode(relay3, OUTPUT);  
@@ -56,7 +44,7 @@ void setup()
   digitalWrite(Speed1, LOW);
   digitalWrite(Speed2, LOW);
   digitalWrite(Speed4, LOW);    
-  connectWiFi();
+
   server.begin();
 }
 
@@ -143,20 +131,7 @@ void loop()
 }
 
 /* connecting WiFi */
-void connectWiFi()
-{
-  Serial.println("Connecting to WIFI");
-  WiFi.begin(ssid, password);
-  while ((!(WiFi.status() == WL_CONNECTED)))
-  {
-    delay(300);
-    Serial.print("..");
-  }
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("NodeMCU Local IP is : ");
-  Serial.print((WiFi.localIP()));
-}
+
 
 /* check command received from Android Device */
 String checkClient (void)
@@ -181,3 +156,8 @@ void sendBackEcho(String echo)
   client.stop();
   delay(1);
 }
+
+
+
+
+   
