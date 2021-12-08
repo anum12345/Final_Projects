@@ -32,19 +32,18 @@ void setup()
   pinMode(relay3, OUTPUT);  
 
 
-  digitalWrite(relay1,LOW);
-  digitalWrite(relay2,LOW);
-  digitalWrite(relay3,LOW);
+  digitalWrite(RelayPin1, HIGH);
+  digitalWrite(RelayPin2, HIGH);
+  digitalWrite(RelayPin3, HIGH);
 
  
   pinMode(Speed1, OUTPUT);
   pinMode(Speed2, OUTPUT);
   pinMode(Speed4, OUTPUT);
   //Initially the fan will be in OFF state
-  digitalWrite(Speed1, LOW);
-  digitalWrite(Speed2, LOW);
-  digitalWrite(Speed4, LOW);    
-
+  digitalWrite(Speed1, HIGH);
+  digitalWrite(Speed2, HIGH);
+  digitalWrite(Speed4, HIGH);
   server.begin();
 }
 
@@ -56,31 +55,31 @@ void loop()
 
          if(val == "room bulb on")
     {
-      digitalWrite(14, HIGH);
+      digitalWrite(14,LOW);
     }
     if(val == "room bulb off")
     {
-      digitalWrite(14, LOW);
+      digitalWrite(14, HIGH);
     }
     if(val == "kitchen bulb on")
     {
-      digitalWrite(15, HIGH);
+      digitalWrite(15, LOW);
     }
     if(val == "kitchen bulb off")
     {
-      digitalWrite(15, LOW);
+      digitalWrite(15, HIGH);
     }
     if(val == "controller room bulb on")
     {
-      digitalWrite(3, HIGH);
+      digitalWrite(3, LOW);
     }
     if(val == "controller room bulb off")
     {
-      digitalWrite(3, LOW);
+      digitalWrite(3,HIGH);
     }
    
     
-    if (val== "fan off")
+   if (val== "fan off")
   {
     //All realys Off - Fan Off
     
@@ -89,43 +88,50 @@ void loop()
     digitalWrite(Speed4, LOW);
   }
 
-  if (val=="fan on at low speed")
+  if (val == "fan speed one ")
   {
     //Speed1 Relay On - Fan at speed 1
     
-    digitalWrite(Speed1, LOW);
-    digitalWrite(Speed2, LOW);
-    digitalWrite(Speed4, LOW);
-    delay(500);
     digitalWrite(Speed1, HIGH);
+    digitalWrite(Speed2, HIGH);
+    digitalWrite(Speed4, HIGH);
+    delay(500);
+    digitalWrite(Speed1, LOW);
   }
 
-  if (val == "fan on at medium speed")
+  if (val="fan speed two ")
   {
     //Speed2 Relay On - Fan at speed 2
     
-    digitalWrite(Speed1, LOW);
-    digitalWrite(Speed2, LOW);
-    digitalWrite(Speed4, LOW);
-    delay(500);
-    digitalWrite(Speed2, HIGH);
-    digitalWrite(Speed4, HIGH);
-  }
-
-  if (val == "fan on at high speed")
-  {
-    //Speed1 & Speed2 Relays On - Fan at speed 3
-    
-    digitalWrite(Speed1, LOW);
-    digitalWrite(Speed2, LOW);
-    digitalWrite(Speed4, LOW);
-    delay(500);
     digitalWrite(Speed1, HIGH);
     digitalWrite(Speed2, HIGH);
     digitalWrite(Speed4, HIGH);
+    delay(500);
+    digitalWrite(Speed2, LOW);
+  }
+
+  if (val="fan speed three")
+  {
+    //Speed1 & Speed2 Relays On - Fan at speed 3
     
-  } 
-  
+    digitalWrite(Speed1, HIGH);
+    digitalWrite(Speed2, HIGH);
+    digitalWrite(Speed4, HIGH);
+    delay(500);
+    digitalWrite(Speed1, LOW);
+    digitalWrite(Speed2, LOW);
+  }
+
+  if (val="fan speed four")
+  {
+    //Speed4 Relay On - Fan at speed 4
+    
+    digitalWrite(Speed1, HIGH);
+    digitalWrite(Speed2, HIGH);
+    digitalWrite(Speed4, HIGH);
+    delay(500);
+    digitalWrite(Speed4, LOW);
+  }
     sendBackEcho(val); // send command echo back to android device
     val = "";
 }
