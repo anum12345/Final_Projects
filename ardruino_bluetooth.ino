@@ -87,7 +87,7 @@ void loop() {
     digitalWrite(Speed1, LOW);
 //     digitalWrite(Speed2, LOW);
 //     digitalWrite(Speed4, LOW);
-//    }
+    }
 
 //   if (val == "fan speed one ")
 //   {
@@ -136,6 +136,5 @@ void loop() {
   
 }
 }
-
 
 
